@@ -2,14 +2,13 @@
 
 namespace Nonocompany\MediaManager\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Media extends Model
+class File extends Model
 {
-    use SoftDeletes, HasUuids;
+    use SoftDeletes;
 
     protected $fillable = [
         'folder_id',
@@ -22,7 +21,7 @@ class Media extends Model
         'size',
         'disk',
         'width',
-        'height',
+        'height'
     ];
 
     protected $hidden = [
@@ -35,6 +34,4 @@ class Media extends Model
     {
         return $this->belongsTo(Folder::class);
     }
-
-
 }

@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from 'react-router-dom';
 import {useStateContext} from '../../contexts/StateContext';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 export const Create = () => {
     const {parent_id} = useParams();
@@ -16,6 +16,14 @@ export const Create = () => {
 
     const backRoute = () => {
         navigate(-1)
+    }
+
+    const [formData, setFormData] = useState({
+        name: ''
+    });
+
+    const send = () => {
+
     }
 
     return (
@@ -34,8 +42,12 @@ export const Create = () => {
             <div className="row mt-4">
                 <div className="col-12">
                     <div className="input-group">
-                        <input type="text" className="form-control" id="name" placeholder="Klasör Adı"/>
-                        <button className="btn btn-outline-success" type="button" id="send">Kaydet</button>
+                        <input type="text" className="form-control" id="name" value={formData.name} onChange={
+                            (event) => {
+                                setFormData({...formData, name: event.target.value})
+                            }
+                        } placeholder="Klasör Adı"/>
+                            <button className="btn btn-primary" type="button" onClick={send}>Kaydet</button>
                     </div>
 
                 </div>
@@ -43,3 +55,6 @@ export const Create = () => {
         </div>
     )
 }
+
+
+

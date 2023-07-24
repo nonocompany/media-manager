@@ -24,9 +24,9 @@ class Folder extends Model
         'deleted_at',
     ];
 
-    public function medias(): HasMany
+    public function files(): HasMany
     {
-        return $this->hasMany(Media::class);
+        return $this->hasMany(Files::class);
     }
 
     public function childFolders(): HasMany

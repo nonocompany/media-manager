@@ -17,7 +17,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('medias', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('folder_id')->nullable()->constrained();
             $table->boolean('is_clone')->default(false);
@@ -40,6 +40,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('medias');
+        Schema::dropIfExists('files');
     }
 };

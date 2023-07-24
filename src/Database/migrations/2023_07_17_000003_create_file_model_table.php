@@ -18,9 +18,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('media_model', function (Blueprint $table) {
+        Schema::create('file_model', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('media_id')->constrained('medias', 'id');
+            $table->foreignUuid('file_id')->constrained('files', 'id');
             $table->uuidMorphs('model');
             $table->string('key')->nullable();
             $table->unsignedInteger('order')->nullable();
@@ -32,6 +32,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('media_model');
+        Schema::dropIfExists('file_model');
     }
 };
