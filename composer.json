@@ -1,0 +1,33 @@
+{
+    "name": "nonocompany/media-manager",
+    "description": "Media Manager for Laravel",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "intervention/image": "^2.7"
+    },
+    "authors": [
+        {
+            "name": "Egemen KIRKAPLAN",
+            "email": "egemen.k@nono.company"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Nonocompany\\MediaManager\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nonocompany\\MediaManager\\MediaManagerServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "classmap-authoritative": true,
+        "apcu-autoloader": true,
+        "optimize-autoloader": true
+    }
+}
