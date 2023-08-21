@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->foreignUuid('folder_id')->nullable()->constrained();
             $table->boolean('is_clone')->default(false);
             $table->uuid('original_id')->nullable();
+            $table->string('slug');
             $table->string('name');
             $table->string('hash_name');
             $table->string('mime_type');

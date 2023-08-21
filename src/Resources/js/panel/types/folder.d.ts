@@ -1,6 +1,6 @@
 import {File} from "./";
 export interface Folder {
-    id: string,
+    id: string|null,
     name: string,
     parent_id: string|null,
     children: Folder[]|[],

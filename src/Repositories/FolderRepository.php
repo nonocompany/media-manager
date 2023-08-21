@@ -16,7 +16,7 @@ readonly class FolderRepository implements FolderInterface
      */
     public function index(): Collection
     {
-        return $this->folder->get();
+        return $this->folder->whereNull('parent_id')->get();
     }
 
     /**

@@ -5,19 +5,15 @@ import {File} from '../../types';
 import classNames from "classnames";
 import {useEffect} from "react";
 export const Sidebar = () => {
-    const {data, sync} = useSelectedContext();
-    const {state} = useStateContext();
-    useEffect(() => {
+    const {data, setData} = useSelectedContext();
 
-    });
     return (
-        <div className={classNames('sidebarContainer', {'shadow-none': state.sidebarStatus})}>
+        <div className={classNames('sidebarContainer')}>
             <aside>
                 <div className="sidebarLogo">
                     <Logo/>
                 </div>
                 {
-                    !state.sidebarStatus &&
                     <div className="row">
                         <div className="col-12">
                             <div className="sidebarTitle">
@@ -54,9 +50,9 @@ export const Sidebar = () => {
 }
 
 export const SmallFileCard = (file: File) => {
-    const {data, sync} = useSelectedContext();
+    const {data, setData} = useSelectedContext();
     const removeFile = (file: File) => {
-        sync(data.filter((item: File) => item.id !== file.id));
+        setData(data.filter((item: File) => item.id !== file.id));
     }
     return (
         <div className="imageCover shadow" onClick={() => removeFile(file)}>

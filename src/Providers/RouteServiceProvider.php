@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::prefix('medias')->middleware('web')->group(function ($router) {
+        Route::prefix('medias')->middleware('web')->as('medias.')->group(function ($router) {
             require __DIR__ . '/../Routes/web.php';
         });
     }

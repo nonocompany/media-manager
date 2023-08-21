@@ -26,7 +26,7 @@ class Folder extends Model
 
     public function files(): HasMany
     {
-        return $this->hasMany(Files::class);
+        return $this->hasMany(File::class);
     }
 
     public function childFolders(): HasMany

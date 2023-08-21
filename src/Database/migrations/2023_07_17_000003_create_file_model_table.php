@@ -19,7 +19,6 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('file_model', function (Blueprint $table) {
-            $table->uuid('id')->primary();
             $table->foreignUuid('file_id')->constrained('files', 'id');
             $table->uuidMorphs('model');
             $table->string('key')->nullable();

@@ -5,7 +5,6 @@ export const Router = () => {
     return (
         <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/folders/create/:parent_id?" element={<FolderCreate />} />
             <Route path="/folders/:id" element={<FolderIndex />} />
         </Routes>
     );

@@ -1,29 +1,48 @@
-import React from "react";
+import React, {useState} from "react";
 import ReactDOM from "react-dom/client";
-import {MemoryRouter} from "react-router-dom";
+import {HashRouter, MemoryRouter} from "react-router-dom";
 import {Index} from "./layouts/index";
-import {FileSelectedContextProvider} from "./contexts/FileSelectedContext";
-import {StatateContextProvider} from "./contexts/StateContext";
+import "../../css/panel/app.css";
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {fas} from '@fortawesome/free-solid-svg-icons'
+import {StateContextProvider, useStateContext} from "./contexts/StateContext";
 
-const aa: string | null = document.getElementById("root").getAttribute("data-react-props");
-let inputElement = document.createElement("input");
+library.add(fas)
 
-// Özelliklerini ayarlayın
-inputElement.setAttribute("type", "hidden");
-inputElement.setAttribute("name", "react-props");
+const mediasInputElements = document.getElementsByClassName("medias-input");
+const popupBackgroundElement = document.querySelector(".popupBackground");
 
-// Elementi sayfaya ekleyin (örneğin, bir formun içine eklemek için)
-let formElement = document.querySelector("form"); // formun id'si myForm olarak varsayalım
-formElement.appendChild(inputElement);
-console.log(aa);
-ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-        <MemoryRouter>
-            <StatateContextProvider>
-            <FileSelectedContextProvider>
-                <Index/>
-            </FileSelectedContextProvider>
-            </StatateContextProvider>
-        </MemoryRouter>
-    </React.StrictMode>
-);
+for (const element of mediasInputElements) {
+    const hiddenInput = document.createElement("input");
+    let acceptedFile = "";
+    let name = "";
+    let isMultiple = false;
+    hiddenInput.type = "hidden";
+    for (const attribute of element.attributes) {
+        if (attribute.name === "name") {
+            hiddenInput.name = `medias[${attribute.value}]`;
+            hiddenInput.id = attribute.value;
+            name = attribute.value;
+        }
+        if (attribute.name === "accepted-file") {
+            acceptedFile = attribute.value;
+        }
+        if (attribute.name === "multiple") {
+            console.log(attribute.name);
+            isMultiple = true;
+        }
+    }
+
+    document.querySelector("form").append(hiddenInput);
+    ReactDOM.createRoot(element!).render(
+        <React.StrictMode>
+            <HashRouter>
+                <StateContextProvider>
+                    <Index name={name} isMultiple={isMultiple} acceptedFile={acceptedFile}/>
+                </StateContextProvider>
+            </HashRouter>
+        </React.StrictMode>
+    );
+}
+
+

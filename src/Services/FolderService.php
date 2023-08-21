@@ -16,12 +16,6 @@ readonly class FolderService implements FolderInterface
 
     public function index(): JsonResource
     {
-        $data = [
-            'name' => 'test',
-            'parent_id' => null,
-            'directory' => null,
-        ];
-        folderManager()->make($data);
         return FolderResource::collection($this->repository->index());
     }
 
@@ -32,12 +26,12 @@ readonly class FolderService implements FolderInterface
 
     public function store(array $data): FolderResource
     {
-        folderManager()->make($data);
+        return new FolderResource(folderManager()->make($data));
     }
 
     public function update(Folder $folder, array $data): FolderResource
     {
-        // TODO: Implement update() method.
+return new FolderResource($this->repository->update($folder, $data));
     }
 
     public function destroy(Folder $folder): bool

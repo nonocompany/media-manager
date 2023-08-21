@@ -9,5 +9,7 @@
  */
 
 return [
-
+    'disk' => 'public',
+    'webp_conversion' => false,
+    'image_quality' => 80,
 ];

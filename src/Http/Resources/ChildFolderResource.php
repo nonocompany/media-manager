@@ -5,33 +5,32 @@ namespace Nonocompany\MediaManager\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \Nonocompany\MediaManager\Models\File */
-class FileResource extends JsonResource
+/** @mixin \Nonocompany\MediaManager\Models\Folder */
+class ChildFolderResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
-            'folder_id' => $this->folder_id,
-            'is_clone' => $this->is_clone,
-            'original_id' => $this->original_id,
             'name' => $this->name,
-            'hash_name' => $this->hash_name,
-            'mime_type' => $this->mime_type,
-            'extension' => $this->extension,
-            'size' => $this->size,
-            'disk' => $this->disk,
-            'width' => $this->width,
-            'height' => $this->height,
-            'url' => $this->url,
+            'directory' => $this->directory,
             'size' => $this->getSize(),
-            'last_modified' => $this->updated_at->diffForHumans(),
         ];
     }
 
     private function getSize()
     {
-        $bytes = $this->size;
+        $totalSize = 0;
+        $totalSize += $this->files->sum('size');
+        $chiledFolders = $this->childFolders;
+
+        foreach ($chiledFolders as $chiledFolder) {
+            $totalSize += $chiledFolder->files->sum('size');
+            if ($chiledFolder->childFolders) {
+                $chiledFolders = $chiledFolder->childFolders;
+            }
+        }
+        $bytes = $totalSize;
         if ($bytes >= 1073741824) {
             $returnByte = number_format($bytes / 1073741824, 2);
             $unit = 'GB';

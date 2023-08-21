@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->uuid('parent_id')->nullable();
-            $table->string('directory')->nullable();
+            $table->text('directory')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,7 +4,7 @@ import {File, FileContext} from '../types';
 
 const FileSelectedContext = createContext<FileContext>({
     data: [],
-    sync: (): void => {
+    setData: (): void => {
     }
 });
 
@@ -15,13 +15,9 @@ export const useSelectedContext = () => {
 export const FileSelectedContextProvider = ({children}: { children: JSX.Element }): JSX.Element => {
     const [data, setData] = useState<File[]>([]);
 
-    // Veriyi güncelleyen fonksiyon
-    const sync = (data: File[]): void => {
-        setData(data);
-    };
 
     return (
-        <FileSelectedContext.Provider value={{data, sync}}>
+        <FileSelectedContext.Provider value={{data, setData}}>
             {children}
         </FileSelectedContext.Provider>
     );

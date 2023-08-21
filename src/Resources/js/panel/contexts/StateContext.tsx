@@ -1,34 +1,28 @@
 import {createContext, useContext, useState} from 'react';
-import {StateContext} from '../types';
 
-
-const StatateContext = createContext<StateContext>({
+const StateContext = createContext({
     state: {
-        sidebarStatus: true
+        name: "",
+        acceptedFile: "",
+        isMultiple: false,
     },
-    updateState: (): void => {
-    }
+    setState: (): void => {}
 });
 
 export const useStateContext = () => {
+    return useContext(StateContext);
+}
 
-    return useContext(StatateContext);;
-};
-
-export const StatateContextProvider = ({children}: { children: JSX.Element }): JSX.Element => {
-    const [state, setData] = useState<StateContext>([]);
-
-
-    // Veriyi güncelleyen fonksiyon
-    const updateState = (state: StateContext): void => {
-        setData(state);
-    };
-
-
+export const StateContextProvider = ({children}: { children: JSX.Element }): JSX.Element => {
+    const [state, setState] = useState({
+        name: "",
+        acceptedFile: "",
+        isMultiple: false,
+    });
 
     return (
-        <StatateContext.Provider value={{state, updateState}}>
+        <StateContext.Provider value={{state, setState}}>
             {children}
-        </StatateContext.Provider>
+        </StateContext.Provider>
     );
-};
+}
